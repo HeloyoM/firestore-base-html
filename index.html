@@ -21,10 +21,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-        import { getFirestore, collection } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
-
-        const firebaseConfig = { //get that configuration details from your firestore settings
+        const firebaseConfig = { // Obtain that configuration details from your firestore settings
             apiKey: "API-KEY",
             authDomain: "url",
             projectId: "id",
@@ -55,6 +54,22 @@
          This reference can then be used to perform database operations.
         */
         const db = getDatabase()
+
+
+
+        /*
+        get (read) example - alocate the collection do you want to read from
+        and get the data and after loop on the result, because it's an array
+        make "forEach" on that.
+        getDocs() and collection() methods are imported above from the firebase client module
+        */
+        async function getRequestExample() {
+            const querySnapshot = await getDocs(collection(firestore, 'NAME-OF-COLLECTION'));
+
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+            });
+        }
 
     </script>
 </body>
