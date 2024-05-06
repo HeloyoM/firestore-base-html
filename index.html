@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+        import { getFirestore, collection } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+
+
+        const firebaseConfig = { //get that configuration details from your firestore settings
+            apiKey: "AP-KEY",
+            authDomain: "url",
+            projectId: "id",
+            storageBucket: "url",
+            messagingSenderId: "number",
+            appId: "id"
+        }
+
+        const app = initializeApp(firebaseConfig)
+        const firestore = getFirestore(app)
+        const db = getDatabase()
+
+    </script>
+</body>
+
+</html>
