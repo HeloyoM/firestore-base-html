@@ -21,7 +21,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-        import { getFirestore, collection, addDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, updateDoc, getDocs, doc as document, collection } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
         const firebaseConfig = { // Obtain that configuration details from your firestore settings
             apiKey: "API-KEY",
@@ -64,16 +64,20 @@
         getDocs() and collection() methods are imported above from the firebase client module
         */
         async function getRequestExample() {
-            const querySnapshot = await getDocs(collection(firestore, 'NAME-OF-COLLECTION'));
+            try {
+                const querySnapshot = await getDocs(collection(firestore, 'NAME-OF-COLLECTION'));
 
-            querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
-            });
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.id, " => ", doc.data());
+                });
+            } catch (err) {
+                console.log(`Error occured while fetching data from firestore: ${err}`)
+            }
         }
 
         /*
          making post request should contain at least 2 parameters: 
-         1. collection 
+         1. collection ref 
          2. payload body (data you wan to insert)
         */
         async function postRequestExample(data) {
@@ -82,6 +86,22 @@
 
             } catch (e) {
                 console.error("Error adding document: ", e);
+            }
+        }
+
+        /*
+        making put request should conatin at least 2 parameters: 
+        1. collection ref till to the docuemnt based od the id of the document
+        2. update data to replace in there.
+        */
+
+        async function updateRequestExample(doc, updatedData) {
+            try {
+                await updateDoc(document(firestore, 'NAME-OF-COLLECTION', doc.id), updatedData);
+
+                console.log("Document updated successfully!");
+            } catch (error) {
+                console.error("Error updating document: ", error);
             }
         }
 
