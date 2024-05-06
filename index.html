@@ -21,7 +21,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-        import { getFirestore, collection, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
         const firebaseConfig = { // Obtain that configuration details from your firestore settings
             apiKey: "API-KEY",
@@ -69,6 +69,20 @@
             querySnapshot.forEach((doc) => {
                 console.log(doc.id, " => ", doc.data());
             });
+        }
+
+        /*
+         making post request should contain at least 2 parameters: 
+         1. collection 
+         2. payload body (data you wan to insert)
+        */
+        async function postRequestExample(data) {
+            try {
+                await addDoc(collection(firestore, 'NAME-OF-COLLECTION'), data)
+
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
         }
 
     </script>
